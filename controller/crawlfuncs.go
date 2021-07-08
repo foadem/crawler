@@ -10,7 +10,19 @@ import (
 
 func CrawlTechnolife() {
 
-	es, err := elasticsearch.NewDefaultClient()
+	var (
+		clusterURLs = []string{"http://localhost:9200"}
+		username    = "elastic"
+		password    = "Motorola1Defy"
+	)
+
+	cfg := elasticsearch.Config{
+		Addresses: clusterURLs,
+		Username:  username,
+		Password:  password,
+	}
+
+	es, err := elasticsearch.NewClient(cfg)
 	if err != nil {
 		log.Fatalf("Error creating the client: %s", err)
 	}
